@@ -1,3 +1,6 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -13,7 +16,7 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
-    --primary: 222.2 47.4% 11.2%;
+    --primary: 230 83% 60%;
     --primary-foreground: 210 40% 98%;
 
     --secondary: 210 40% 96.1%;
@@ -22,7 +25,7 @@
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
 
-    --accent: 210 40% 96.1%;
+    --accent: 39 84% 55%;
     --accent-foreground: 222.2 47.4% 11.2%;
 
     --destructive: 0 84.2% 60.2%;
@@ -35,19 +38,12 @@
     --radius: 0.5rem;
 
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
     --sidebar-primary: 240 5.9% 10%;
-
     --sidebar-primary-foreground: 0 0% 98%;
-
     --sidebar-accent: 240 4.8% 95.9%;
-
     --sidebar-accent-foreground: 240 5.9% 10%;
-
     --sidebar-border: 220 13% 91%;
-
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
@@ -97,5 +93,50 @@
 
   body {
     @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-white/80 backdrop-blur-sm border border-white/20 shadow-lg;
+  }
+
+  .cta-button {
+    @apply relative px-6 py-3 bg-cifcg-600 text-white font-medium rounded-md
+      overflow-hidden transition-all duration-300 shadow-md hover:shadow-xl
+      hover:scale-[1.02] active:scale-[0.98] after:content-[''] after:absolute after:inset-0
+      after:bg-white/20 after:opacity-0 hover:after:opacity-100 after:transition-opacity;
+  }
+
+  .cta-button-secondary {
+    @apply relative px-6 py-3 bg-white text-cifcg-800 font-medium rounded-md border border-cifcg-200
+      overflow-hidden transition-all duration-300 shadow-md hover:shadow-xl hover:bg-cifcg-50
+      hover:scale-[1.02] active:scale-[0.98];
+  }
+
+  .nav-link {
+    @apply relative text-cifcg-800 hover:text-cifcg-600 transition-colors duration-200
+      after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-cifcg-600
+      after:origin-center after:scale-x-0 after:transition-transform after:duration-300
+      hover:after:scale-x-100;
+  }
+
+  .section-title {
+    @apply text-3xl md:text-4xl font-display font-semibold text-cifcg-900 mb-4;
+  }
+
+  .section-subtitle {
+    @apply text-lg text-cifcg-600 mb-8 max-w-2xl mx-auto;
+  }
+  
+  .event-card {
+    @apply bg-white rounded-xl p-6 shadow-md transition-all duration-300
+      hover:shadow-xl hover:translate-y-[-5px];
+  }
+  
+  .input-field {
+    @apply px-4 py-3 rounded-md border border-cifcg-200 focus:border-cifcg-500
+      focus:ring-2 focus:ring-cifcg-200 outline-none transition-all duration-200;
   }
 }
