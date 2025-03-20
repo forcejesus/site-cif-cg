@@ -8,9 +8,6 @@ import EngagementSection from '@/components/EngagementSection';
 import Footer from '@/components/Footer';
 import { useInView } from 'react-intersection-observer';
 
-// We need to install react-intersection-observer
-<lov-add-dependency>react-intersection-observer@9.7.0</lov-add-dependency>
-
 const Index = () => {
   useEffect(() => {
     // Smooth scroll behavior
