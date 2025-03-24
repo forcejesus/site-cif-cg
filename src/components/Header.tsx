@@ -1,6 +1,5 @@
-
 import React, { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Info } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useToast } from '@/hooks/use-toast';
 
@@ -20,8 +19,8 @@ const Header = () => {
 
   const handleMenuItemClick = (item: string) => {
     toast({
-      title: "Page en cours de développement",
-      description: `La page "${item}" est actuellement en cours de développement et sera disponible prochainement.`,
+      title: "📋 Page en cours de développement",
+      description: `La page "${item}" est actuellement en développement et sera disponible prochainement.`,
       variant: "default",
       duration: 3000,
     });
@@ -49,57 +48,57 @@ const Header = () => {
           <span className="text-cifcg-600">CIF</span>-CG
         </a>
 
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center space-x-8">
-          <ul className="flex space-x-8">
-            {['À propos', 'Actualités', 'Événements', 'Adhésion', 'Contact'].map((item) => (
-              <li key={item}>
-                <button 
-                  onClick={() => handleMenuItemClick(item)}
-                  className={cn(
-                    'text-sm font-medium transition-colors duration-300',
-                    isScrolled ? 'text-cifcg-800 hover:text-cifcg-600' : 'text-white/90 hover:text-white'
-                  )}
-                >
-                  {item}
-                </button>
-              </li>
-            ))}
-          </ul>
-          <div className="flex space-x-4">
-            <button 
-              onClick={() => handleMenuItemClick('Devenir membre')}
-              className={cn(
-                'px-4 py-2 text-sm font-medium rounded-md transition-all duration-300',
-                isScrolled 
-                  ? 'bg-white text-cifcg-600 hover:bg-cifcg-50 border border-cifcg-200' 
-                  : 'bg-white/10 text-white hover:bg-white/20 backdrop-blur-sm'
-              )}
-            >
-              Devenir membre
-            </button>
-            <button 
-              onClick={() => handleMenuItemClick('Faire un don')}
-              className="px-4 py-2 bg-cifcg-600 text-white text-sm font-medium rounded-md transition-all duration-300 hover:bg-cifcg-700"
-            >
-              Faire un don
-            </button>
-          </div>
-        </nav>
+      {/* Desktop Navigation */}
+      <nav className="hidden md:flex items-center space-x-8">
+        <ul className="flex space-x-8">
+          {['À propos', 'Actualités', 'Événements', 'Adhésion', 'Contact'].map((item) => (
+            <li key={item}>
+              <button 
+                onClick={() => handleMenuItemClick(item)}
+                className={cn(
+                  'text-sm font-medium transition-colors duration-300 flex items-center gap-1',
+                  isScrolled ? 'text-cifcg-800 hover:text-cifcg-600' : 'text-white/90 hover:text-white'
+                )}
+              >
+                {item}
+              </button>
+            </li>
+          ))}
+        </ul>
+        <div className="flex space-x-4">
+          <button 
+            onClick={() => handleMenuItemClick('Devenir membre')}
+            className={cn(
+              'px-4 py-2 text-sm font-medium rounded-md transition-all duration-300',
+              isScrolled 
+                ? 'bg-white text-cifcg-600 hover:bg-cifcg-50 border border-cifcg-200' 
+                : 'bg-white/10 text-white hover:bg-white/20 backdrop-blur-sm'
+            )}
+          >
+            Devenir membre
+          </button>
+          <button 
+            onClick={() => handleMenuItemClick('Faire un don')}
+            className="px-4 py-2 bg-cifcg-600 text-white text-sm font-medium rounded-md transition-all duration-300 hover:bg-cifcg-700"
+          >
+            Faire un don
+          </button>
+        </div>
+      </nav>
 
-        {/* Mobile Menu Button */}
-        <button 
-          className="md:hidden"
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          aria-label="Toggle menu"
-        >
-          {isMobileMenuOpen ? (
-            <X className={cn('h-6 w-6', isScrolled ? 'text-cifcg-900' : 'text-white')} />
-          ) : (
-            <Menu className={cn('h-6 w-6', isScrolled ? 'text-cifcg-900' : 'text-white')} />
-          )}
-        </button>
-      </div>
+      {/* Mobile Menu Button */}
+      <button 
+        className="md:hidden"
+        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+        aria-label="Toggle menu"
+      >
+        {isMobileMenuOpen ? (
+          <X className={cn('h-6 w-6', isScrolled ? 'text-cifcg-900' : 'text-white')} />
+        ) : (
+          <Menu className={cn('h-6 w-6', isScrolled ? 'text-cifcg-900' : 'text-white')} />
+        )}
+      </button>
+    </div>
 
       {/* Mobile Navigation */}
       <nav 
@@ -112,7 +111,7 @@ const Header = () => {
           {['À propos', 'Actualités', 'Événements', 'Adhésion', 'Contact'].map((item) => (
             <li key={item}>
               <button 
-                className="block py-2 text-cifcg-800 hover:text-cifcg-600 transition-colors font-medium w-full text-left"
+                className="block py-2 text-cifcg-800 hover:text-cifcg-600 transition-colors font-medium w-full text-left flex items-center gap-2"
                 onClick={() => handleMenuItemClick(item)}
               >
                 {item}

@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Facebook, Twitter, Instagram, Youtube, Mail, MapPin, Phone } from 'lucide-react';
+import { Facebook, Twitter, Instagram, Youtube, Mail, MapPin, Phone, Info } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
 const Footer = () => {
@@ -8,8 +8,8 @@ const Footer = () => {
 
   const handleLinkClick = (item: string) => {
     toast({
-      title: "Page en cours de développement",
-      description: `La page "${item}" est actuellement en cours de développement et sera disponible prochainement.`,
+      title: "🚧 Page en cours de développement",
+      description: `La page "${item}" est actuellement en développement et sera disponible prochainement.`,
       variant: "default",
       duration: 3000,
     });
@@ -60,40 +60,55 @@ const Footer = () => {
               <li>
                 <button 
                   onClick={() => handleLinkClick("À Propos")} 
-                  className="text-gray-400 hover:text-white transition-colors text-left"
+                  className="text-gray-400 hover:text-white transition-colors text-left flex items-center gap-1 group"
                 >
+                  <span className="opacity-0 -ml-5 mr-1 group-hover:opacity-100 transition-opacity">
+                    <Info className="w-3.5 h-3.5 text-cifcg-500" />
+                  </span>
                   À Propos
                 </button>
               </li>
               <li>
                 <button 
                   onClick={() => handleLinkClick("Actualités")} 
-                  className="text-gray-400 hover:text-white transition-colors text-left"
+                  className="text-gray-400 hover:text-white transition-colors text-left flex items-center gap-1 group"
                 >
+                  <span className="opacity-0 -ml-5 mr-1 group-hover:opacity-100 transition-opacity">
+                    <Info className="w-3.5 h-3.5 text-cifcg-500" />
+                  </span>
                   Actualités
                 </button>
               </li>
               <li>
                 <button 
                   onClick={() => handleLinkClick("Événements")} 
-                  className="text-gray-400 hover:text-white transition-colors text-left"
+                  className="text-gray-400 hover:text-white transition-colors text-left flex items-center gap-1 group"
                 >
+                  <span className="opacity-0 -ml-5 mr-1 group-hover:opacity-100 transition-opacity">
+                    <Info className="w-3.5 h-3.5 text-cifcg-500" />
+                  </span>
                   Événements
                 </button>
               </li>
               <li>
                 <button 
                   onClick={() => handleLinkClick("Adhésion")} 
-                  className="text-gray-400 hover:text-white transition-colors text-left"
+                  className="text-gray-400 hover:text-white transition-colors text-left flex items-center gap-1 group"
                 >
+                  <span className="opacity-0 -ml-5 mr-1 group-hover:opacity-100 transition-opacity">
+                    <Info className="w-3.5 h-3.5 text-cifcg-500" />
+                  </span>
                   Adhésion
                 </button>
               </li>
               <li>
                 <button 
                   onClick={() => handleLinkClick("Contact")} 
-                  className="text-gray-400 hover:text-white transition-colors text-left"
+                  className="text-gray-400 hover:text-white transition-colors text-left flex items-center gap-1 group"
                 >
+                  <span className="opacity-0 -ml-5 mr-1 group-hover:opacity-100 transition-opacity">
+                    <Info className="w-3.5 h-3.5 text-cifcg-500" />
+                  </span>
                   Contact
                 </button>
               </li>
@@ -135,7 +150,7 @@ const Footer = () => {
                 />
                 <button 
                   type="submit" 
-                  className="py-3 px-4 bg-cifcg-600 hover:bg-cifcg-700 text-white rounded-md font-medium transition-colors"
+                  className="py-3 px-4 bg-cifcg-600 hover:bg-cifcg-700 text-white rounded-md font-medium transition-colors flex items-center justify-center gap-2"
                 >
                   S'inscrire
                 </button>

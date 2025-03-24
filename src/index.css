@@ -102,6 +102,10 @@
     @apply bg-white/80 backdrop-blur-sm border border-white/20 shadow-lg;
   }
 
+  .glass-morphism {
+    @apply backdrop-blur-xl bg-white/90 border border-white/20 shadow-md;
+  }
+
   .cta-button {
     @apply relative px-6 py-3 bg-cifcg-600 text-white font-medium rounded-md
       overflow-hidden transition-all duration-300 shadow-md hover:shadow-xl
