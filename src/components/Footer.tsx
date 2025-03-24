@@ -1,32 +1,56 @@
 
 import React from 'react';
 import { Facebook, Twitter, Instagram, Youtube, Mail, MapPin, Phone } from 'lucide-react';
+import { useToast } from '@/hooks/use-toast';
 
 const Footer = () => {
+  const { toast } = useToast();
+
+  const handleLinkClick = (item: string) => {
+    toast({
+      title: "Page en cours de développement",
+      description: `La page "${item}" est actuellement en cours de développement et sera disponible prochainement.`,
+      variant: "default",
+      duration: 3000,
+    });
+  };
+
   return (
     <footer className="bg-cifcg-950 text-white pt-20">
       <div className="container mx-auto px-6 md:px-12 max-w-7xl">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
           <div className="space-y-6">
-            <a href="/" className="inline-block font-display text-2xl font-bold">
+            <span className="inline-block font-display text-2xl font-bold">
               <span className="text-cifcg-500">CIF</span>-CG
-            </a>
+            </span>
             <p className="text-gray-400">
               Convergence et Initiative Francophone au Congo œuvre pour la promotion de la francophonie et le développement des initiatives locales.
             </p>
             <div className="flex space-x-4">
-              <a href="#" className="bg-cifcg-900 hover:bg-cifcg-800 transition-colors p-2 rounded-full">
+              <button 
+                onClick={() => handleLinkClick("Facebook")} 
+                className="bg-cifcg-900 hover:bg-cifcg-800 transition-colors p-2 rounded-full"
+              >
                 <Facebook className="w-5 h-5" />
-              </a>
-              <a href="#" className="bg-cifcg-900 hover:bg-cifcg-800 transition-colors p-2 rounded-full">
+              </button>
+              <button 
+                onClick={() => handleLinkClick("Twitter")} 
+                className="bg-cifcg-900 hover:bg-cifcg-800 transition-colors p-2 rounded-full"
+              >
                 <Twitter className="w-5 h-5" />
-              </a>
-              <a href="#" className="bg-cifcg-900 hover:bg-cifcg-800 transition-colors p-2 rounded-full">
+              </button>
+              <button 
+                onClick={() => handleLinkClick("Instagram")} 
+                className="bg-cifcg-900 hover:bg-cifcg-800 transition-colors p-2 rounded-full"
+              >
                 <Instagram className="w-5 h-5" />
-              </a>
-              <a href="#" className="bg-cifcg-900 hover:bg-cifcg-800 transition-colors p-2 rounded-full">
+              </button>
+              <button 
+                onClick={() => handleLinkClick("Youtube")} 
+                className="bg-cifcg-900 hover:bg-cifcg-800 transition-colors p-2 rounded-full"
+              >
                 <Youtube className="w-5 h-5" />
-              </a>
+              </button>
             </div>
           </div>
 
@@ -34,19 +58,44 @@ const Footer = () => {
             <h3 className="text-lg font-semibold mb-6">Liens Rapides</h3>
             <ul className="space-y-4">
               <li>
-                <a href="/a-propos" className="text-gray-400 hover:text-white transition-colors">À Propos</a>
+                <button 
+                  onClick={() => handleLinkClick("À Propos")} 
+                  className="text-gray-400 hover:text-white transition-colors text-left"
+                >
+                  À Propos
+                </button>
               </li>
               <li>
-                <a href="/actualites" className="text-gray-400 hover:text-white transition-colors">Actualités</a>
+                <button 
+                  onClick={() => handleLinkClick("Actualités")} 
+                  className="text-gray-400 hover:text-white transition-colors text-left"
+                >
+                  Actualités
+                </button>
               </li>
               <li>
-                <a href="/evenements" className="text-gray-400 hover:text-white transition-colors">Événements</a>
+                <button 
+                  onClick={() => handleLinkClick("Événements")} 
+                  className="text-gray-400 hover:text-white transition-colors text-left"
+                >
+                  Événements
+                </button>
               </li>
               <li>
-                <a href="/adhesion" className="text-gray-400 hover:text-white transition-colors">Adhésion</a>
+                <button 
+                  onClick={() => handleLinkClick("Adhésion")} 
+                  className="text-gray-400 hover:text-white transition-colors text-left"
+                >
+                  Adhésion
+                </button>
               </li>
               <li>
-                <a href="/contact" className="text-gray-400 hover:text-white transition-colors">Contact</a>
+                <button 
+                  onClick={() => handleLinkClick("Contact")} 
+                  className="text-gray-400 hover:text-white transition-colors text-left"
+                >
+                  Contact
+                </button>
               </li>
             </ul>
           </div>
@@ -76,7 +125,7 @@ const Footer = () => {
             <p className="text-gray-400 mb-4">
               Inscrivez-vous pour recevoir nos dernières actualités et événements.
             </p>
-            <form className="space-y-4">
+            <form className="space-y-4" onSubmit={(e) => { e.preventDefault(); handleLinkClick("Newsletter"); }}>
               <div className="flex flex-col space-y-4">
                 <input
                   type="email"
@@ -103,11 +152,17 @@ const Footer = () => {
             &copy; {new Date().getFullYear()} CIF-CG. Tous droits réservés.
           </div>
           <div className="flex items-center space-x-4 text-sm text-gray-500">
-            <a href="#" className="hover:text-gray-400 transition-colors">Politique de confidentialité</a>
+            <button className="hover:text-gray-400 transition-colors" onClick={() => handleLinkClick("Politique de confidentialité")}>
+              Politique de confidentialité
+            </button>
             <span>•</span>
-            <a href="#" className="hover:text-gray-400 transition-colors">Mentions légales</a>
+            <button className="hover:text-gray-400 transition-colors" onClick={() => handleLinkClick("Mentions légales")}>
+              Mentions légales
+            </button>
             <span>•</span>
-            <a href="#" className="hover:text-gray-400 transition-colors">Plan du site</a>
+            <button className="hover:text-gray-400 transition-colors" onClick={() => handleLinkClick("Plan du site")}>
+              Plan du site
+            </button>
           </div>
         </div>
       </div>
