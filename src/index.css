@@ -1,5 +1,4 @@
-
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -84,16 +83,78 @@
     --sidebar-border: 240 3.7% 15.9%;
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
-}
-
-@layer base {
+  
+  body {
+    @apply bg-background text-foreground font-body;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading font-semibold tracking-tight;
+  }
+  
+  h1 {
+    @apply text-4xl md:text-5xl lg:text-6xl;
+  }
+  
+  h2 {
+    @apply text-3xl md:text-4xl;
+  }
+  
+  h3 {
+    @apply text-2xl md:text-3xl;
+  }
+  
   * {
     @apply border-border;
   }
+}
 
-  body {
-    @apply bg-background text-foreground;
-    font-feature-settings: "rlig" 1, "calt" 1;
+@layer components {
+  .glass-card {
+    @apply bg-white/80 backdrop-blur-sm border border-white/20 shadow-lg;
+  }
+
+  .glass-morphism {
+    @apply backdrop-blur-xl bg-white/90 border border-white/20 shadow-md;
+  }
+
+  .cta-button {
+    @apply relative px-6 py-3 bg-cifcg-600 text-white font-medium rounded-md
+      overflow-hidden transition-all duration-300 shadow-md hover:shadow-xl
+      hover:scale-[1.02] active:scale-[0.98] after:content-[''] after:absolute after:inset-0
+      after:bg-white/20 after:opacity-0 hover:after:opacity-100 after:transition-opacity;
+  }
+
+  .cta-button-secondary {
+    @apply relative px-6 py-3 bg-white text-cifcg-800 font-medium rounded-md border border-cifcg-200
+      overflow-hidden transition-all duration-300 shadow-md hover:shadow-xl hover:bg-cifcg-50
+      hover:scale-[1.02] active:scale-[0.98];
+  }
+
+  .nav-link {
+    @apply relative text-cifcg-800 hover:text-cifcg-600 transition-colors duration-200
+      after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-cifcg-600
+      after:origin-center after:scale-x-0 after:transition-transform after:duration-300
+      hover:after:scale-x-100 font-body font-medium;
+  }
+
+  .section-title {
+    @apply text-3xl md:text-4xl font-heading font-semibold text-cifcg-900 mb-4;
+  }
+
+  .section-subtitle {
+    @apply text-lg text-cifcg-600 mb-8 max-w-2xl mx-auto font-body;
+  }
+  
+  .event-card {
+    @apply bg-white rounded-xl p-6 shadow-md transition-all duration-300
+      hover:shadow-xl hover:translate-y-[-5px];
+  }
+  
+  .input-field {
+    @apply px-4 py-3 rounded-md border border-cifcg-200 focus:border-cifcg-500
+      focus:ring-2 focus:ring-cifcg-200 outline-none transition-all duration-200;
   }
 }
 
