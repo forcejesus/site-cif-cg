@@ -58,10 +58,9 @@ const NewsEvents = () => {
           </div>
 
           <div className="text-center mt-10">
-            <a 
-              href="#" 
+            <span 
               className={cn(
-                "px-6 py-3 inline-flex items-center bg-white border border-cifcg-200 rounded-lg text-cifcg-700 font-medium hover:bg-cifcg-50 transition-all duration-300 opacity-0",
+                "px-6 py-3 inline-flex items-center bg-white border border-cifcg-200 rounded-lg text-cifcg-700 font-medium transition-all duration-300 opacity-0",
                 newsInView && "animate-slide-in"
               )}
               style={{ animationDelay: '0.6s' }}
@@ -70,7 +69,7 @@ const NewsEvents = () => {
               <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
               </svg>
-            </a>
+            </span>
           </div>
         </div>
 
@@ -110,10 +109,9 @@ const NewsEvents = () => {
           </div>
 
           <div className="text-center mt-10">
-            <a 
-              href="#" 
+            <span 
               className={cn(
-                "px-6 py-3 inline-flex items-center bg-white border border-cifcg-200 rounded-lg text-cifcg-700 font-medium hover:bg-cifcg-50 transition-all duration-300 opacity-0",
+                "px-6 py-3 inline-flex items-center bg-white border border-cifcg-200 rounded-lg text-cifcg-700 font-medium transition-all duration-300 opacity-0",
                 eventsInView && "animate-slide-in"
               )}
               style={{ animationDelay: '0.6s' }}
@@ -122,7 +120,7 @@ const NewsEvents = () => {
               <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
               </svg>
-            </a>
+            </span>
           </div>
         </div>
       </div>
