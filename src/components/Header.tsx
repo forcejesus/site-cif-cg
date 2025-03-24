@@ -2,10 +2,12 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { useToast } from '@/hooks/use-toast';
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { toast } = useToast();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -15,6 +17,16 @@ const Header = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const handleMenuItemClick = (item: string) => {
+    toast({
+      title: "Page en cours de développement",
+      description: `La page "${item}" est actuellement en cours de développement et sera disponible prochainement.`,
+      variant: "default",
+      duration: 3000,
+    });
+    setIsMobileMenuOpen(false);
+  };
 
   return (
     <header 
@@ -42,20 +54,21 @@ const Header = () => {
           <ul className="flex space-x-8">
             {['À propos', 'Actualités', 'Événements', 'Adhésion', 'Contact'].map((item) => (
               <li key={item}>
-                <a 
-                  href={`/${item.toLowerCase().replace('é', 'e')}`} 
+                <button 
+                  onClick={() => handleMenuItemClick(item)}
                   className={cn(
                     'text-sm font-medium transition-colors duration-300',
                     isScrolled ? 'text-cifcg-800 hover:text-cifcg-600' : 'text-white/90 hover:text-white'
                   )}
                 >
                   {item}
-                </a>
+                </button>
               </li>
             ))}
           </ul>
           <div className="flex space-x-4">
             <button 
+              onClick={() => handleMenuItemClick('Devenir membre')}
               className={cn(
                 'px-4 py-2 text-sm font-medium rounded-md transition-all duration-300',
                 isScrolled 
@@ -65,7 +78,10 @@ const Header = () => {
             >
               Devenir membre
             </button>
-            <button className="px-4 py-2 bg-cifcg-600 text-white text-sm font-medium rounded-md transition-all duration-300 hover:bg-cifcg-700">
+            <button 
+              onClick={() => handleMenuItemClick('Faire un don')}
+              className="px-4 py-2 bg-cifcg-600 text-white text-sm font-medium rounded-md transition-all duration-300 hover:bg-cifcg-700"
+            >
               Faire un don
             </button>
           </div>
@@ -95,26 +111,25 @@ const Header = () => {
         <ul className="space-y-4 mb-6">
           {['À propos', 'Actualités', 'Événements', 'Adhésion', 'Contact'].map((item) => (
             <li key={item}>
-              <a 
-                href={`/${item.toLowerCase().replace('é', 'e')}`} 
-                className="block py-2 text-cifcg-800 hover:text-cifcg-600 transition-colors font-medium"
-                onClick={() => setIsMobileMenuOpen(false)}
+              <button 
+                className="block py-2 text-cifcg-800 hover:text-cifcg-600 transition-colors font-medium w-full text-left"
+                onClick={() => handleMenuItemClick(item)}
               >
                 {item}
-              </a>
+              </button>
             </li>
           ))}
         </ul>
         <div className="flex flex-col space-y-3">
           <button 
             className="w-full py-3 text-cifcg-600 border border-cifcg-200 rounded-md font-medium hover:bg-cifcg-50 transition-colors"
-            onClick={() => setIsMobileMenuOpen(false)}
+            onClick={() => handleMenuItemClick('Devenir membre')}
           >
             Devenir membre
           </button>
           <button 
             className="w-full py-3 bg-cifcg-600 text-white rounded-md font-medium hover:bg-cifcg-700 transition-colors"
-            onClick={() => setIsMobileMenuOpen(false)}
+            onClick={() => handleMenuItemClick('Faire un don')}
           >
             Faire un don
           </button>
