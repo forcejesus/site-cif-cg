@@ -1,123 +1,126 @@
 
 import React from 'react';
-import { Calendar, Clock, MapPin, ExternalLink } from 'lucide-react';
+import { Calendar, Clock, MapPin, Newspaper } from 'lucide-react';
+import { cn } from '@/lib/utils';
+import { useInView } from 'react-intersection-observer';
+
+// Removed newsItems array as it's no longer needed
+
+// Removed upcomingEvents array as it's no longer needed
 
 const NewsEvents = () => {
-  return (
-    <section id="events" className="py-20 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 md:px-6">
-        <div className="flex flex-col items-center text-center mb-12">
-          <h2 className="section-title">Actualités & Événements</h2>
-          <p className="section-subtitle">
-            Restez informés des dernières nouvelles et des événements à venir de notre communauté.
-          </p>
-        </div>
+  const { ref: newsSectionRef, inView: newsInView } = useInView({
+    threshold: 0.1,
+    triggerOnce: true,
+  });
 
-        {/* Latest News */}
-        <div className="mb-16">
-          <h3 className="text-2xl font-heading font-semibold text-cifcg-800 mb-8 text-center">Dernières actualités</h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              {
-                image: "https://images.unsplash.com/photo-1539037116277-4db20889f2d4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
-                title: "Nomination du nouveau bureau directeur",
-                date: "15 mars 2023",
-                excerpt: "Suite à l'assemblée générale, nous sommes heureux d'annoncer la composition du nouveau bureau directeur de la CIF-CG."
-              },
-              {
-                image: "https://images.unsplash.com/photo-1607868894064-2b6e7ed1b324?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80",
-                title: "Partenariat avec l'université de Bourgogne",
-                date: "28 février 2023",
-                excerpt: "Un nouveau partenariat a été signé pour faciliter les échanges académiques entre étudiants ivoiriens et bourguignons."
-              },
-              {
-                image: "https://images.unsplash.com/photo-1604881988758-f76ad2f7aac1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1171&q=80",
-                title: "Succès de notre campagne de solidarité",
-                date: "10 janvier 2023",
-                excerpt: "Grâce à votre générosité, nous avons pu collecter des fonds pour soutenir les projets éducatifs dans les zones rurales de Côte d'Ivoire."
-              }
-            ].map((news, index) => (
-              <div key={index} className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow">
-                <div className="h-48 overflow-hidden">
-                  <img 
-                    src={news.image} 
-                    alt={news.title} 
-                    className="w-full h-full object-cover object-center transform hover:scale-105 transition-transform duration-500"
-                  />
-                </div>
-                <div className="p-6">
-                  <p className="text-cifcg-500 text-sm mb-2">{news.date}</p>
-                  <h4 className="text-xl font-heading font-semibold text-cifcg-800 mb-3">{news.title}</h4>
-                  <p className="text-cifcg-600 mb-4">{news.excerpt}</p>
-                  <a href="#" className="inline-flex items-center text-cifcg-600 hover:text-cifcg-800 font-medium transition-colors">
-                    Lire la suite
-                    <ExternalLink className="ml-1 h-4 w-4" />
-                  </a>
-                </div>
-              </div>
-            ))}
+  const { ref: eventsSectionRef, inView: eventsInView } = useInView({
+    threshold: 0.1,
+    triggerOnce: true,
+  });
+
+  return (
+    <section className="py-24 bg-gray-50">
+      <div className="container mx-auto px-6 md:px-12 max-w-7xl">
+        <div ref={newsSectionRef} className="mb-20">
+          <div className="text-center mb-16">
+            <h2 className={cn(
+              "section-title opacity-0",
+              newsInView && "animate-slide-in"
+            )}>
+              Actualités
+            </h2>
+            <p className={cn(
+              "section-subtitle opacity-0",
+              newsInView && "animate-slide-in"
+            )} style={{ animationDelay: '0.2s' }}>
+              Restez informé des dernières nouvelles et activités de notre association
+            </p>
+          </div>
+
+          {/* Empty state message for news */}
+          <div 
+            className={cn(
+              "bg-white p-10 rounded-xl text-center shadow-md opacity-0",
+              newsInView && "animate-slide-in"
+            )}
+            style={{ animationDelay: '0.3s' }}
+          >
+            <div className="mb-6">
+              <Newspaper className="w-12 h-12 mx-auto text-cifcg-300" />
+            </div>
+            <h3 className="text-xl font-semibold text-cifcg-800 mb-3">
+              Aucune actualité pour le moment
+            </h3>
+            <p className="text-gray-600 max-w-md mx-auto">
+              Nous travaillons sur de nouvelles actualités. Revenez bientôt pour les découvrir.
+            </p>
+          </div>
+
+          <div className="text-center mt-10">
+            <span 
+              className={cn(
+                "px-6 py-3 inline-flex items-center bg-white border border-cifcg-200 rounded-lg text-cifcg-700 font-medium transition-all duration-300 opacity-0",
+                newsInView && "animate-slide-in"
+              )}
+              style={{ animationDelay: '0.6s' }}
+            >
+              Toutes les actualités
+              <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+              </svg>
+            </span>
           </div>
         </div>
 
-        {/* Upcoming Events */}
-        <div>
-          <h3 className="text-2xl font-heading font-semibold text-cifcg-800 mb-8 text-center">Événements à venir</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {[
-              {
-                title: "Fête de l'indépendance de la Côte d'Ivoire",
-                date: "7 août 2023",
-                time: "14:00 - 22:00",
-                location: "Parc de la Colombière, Dijon",
-                description: "Célébration de la fête nationale ivoirienne avec de la musique, de la danse, de la cuisine traditionnelle et des activités pour toute la famille."
-              },
-              {
-                title: "Conférence: Opportunités d'affaires entre la Bourgogne et la Côte d'Ivoire",
-                date: "15 septembre 2023",
-                time: "18:30 - 20:30",
-                location: "Chambre de Commerce et d'Industrie, Dijon",
-                description: "Présentation des opportunités d'investissement et d'échanges commerciaux entre la région Bourgogne et la Côte d'Ivoire."
-              },
-              {
-                title: "Atelier culinaire: à la découverte de la cuisine ivoirienne",
-                date: "8 octobre 2023",
-                time: "11:00 - 15:00",
-                location: "Maison des Associations, Dijon",
-                description: "Apprenez à préparer des plats traditionnels ivoiriens lors de cet atelier culinaire suivi d'une dégustation conviviale."
-              },
-              {
-                title: "Soirée culturelle: contes et musiques d'Afrique de l'Ouest",
-                date: "18 novembre 2023",
-                time: "19:00 - 22:00",
-                location: "Théâtre des Feuillants, Dijon",
-                description: "Une soirée immersive dans la culture d'Afrique de l'Ouest à travers des contes traditionnels et des performances musicales."
-              }
-            ].map((event, index) => (
-              <div key={index} className="event-card group">
-                <h4 className="text-xl font-heading font-semibold text-cifcg-800 mb-3 group-hover:text-cifcg-600 transition-colors">{event.title}</h4>
-                <ul className="space-y-2 mb-4">
-                  <li className="flex items-center text-cifcg-600">
-                    <Calendar className="h-4 w-4 mr-2 text-cifcg-500" />
-                    <span>{event.date}</span>
-                  </li>
-                  <li className="flex items-center text-cifcg-600">
-                    <Clock className="h-4 w-4 mr-2 text-cifcg-500" />
-                    <span>{event.time}</span>
-                  </li>
-                  <li className="flex items-center text-cifcg-600">
-                    <MapPin className="h-4 w-4 mr-2 text-cifcg-500" />
-                    <span>{event.location}</span>
-                  </li>
-                </ul>
-                <p className="text-cifcg-600 mb-4">{event.description}</p>
-                <a 
-                  href="#" 
-                  className="inline-block px-4 py-2 bg-cifcg-600 text-white text-sm font-medium rounded-md hover:bg-cifcg-700 transition-colors"
-                >
-                  En savoir plus
-                </a>
-              </div>
-            ))}
+        <div ref={eventsSectionRef} className="mt-20">
+          <div className="text-center mb-16">
+            <h2 className={cn(
+              "section-title opacity-0",
+              eventsInView && "animate-slide-in"
+            )}>
+              Événements à venir
+            </h2>
+            <p className={cn(
+              "section-subtitle opacity-0",
+              eventsInView && "animate-slide-in"
+            )} style={{ animationDelay: '0.2s' }}>
+              Découvrez et participez à nos prochains événements
+            </p>
+          </div>
+          
+          {/* Empty state message for events */}
+          <div 
+            className={cn(
+              "bg-white p-10 rounded-xl text-center shadow-md opacity-0",
+              eventsInView && "animate-slide-in"
+            )}
+            style={{ animationDelay: '0.3s' }}
+          >
+            <div className="mb-6">
+              <Calendar className="w-12 h-12 mx-auto text-cifcg-300" />
+            </div>
+            <h3 className="text-xl font-semibold text-cifcg-800 mb-3">
+              Aucun événement à venir pour le moment
+            </h3>
+            <p className="text-gray-600 max-w-md mx-auto">
+              Nous préparons de nouveaux événements. Revenez bientôt pour découvrir notre programme.
+            </p>
+          </div>
+
+          <div className="text-center mt-10">
+            <span 
+              className={cn(
+                "px-6 py-3 inline-flex items-center bg-white border border-cifcg-200 rounded-lg text-cifcg-700 font-medium transition-all duration-300 opacity-0",
+                eventsInView && "animate-slide-in"
+              )}
+              style={{ animationDelay: '0.6s' }}
+            >
+              Tous les événements
+              <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+              </svg>
+            </span>
           </div>
         </div>
       </div>
