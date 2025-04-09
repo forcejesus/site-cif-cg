@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { cn } from '@/lib/utils';
 import { useInView } from 'react-intersection-observer';
@@ -15,7 +14,7 @@ const EngagementSection = () => {
       ref={ref}
       className="py-24 bg-cifcg-900 text-white relative overflow-hidden"
     >
-      <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1593106584374-89259e7efb8b?q=80&w=1964&auto=format&fit=crop')] bg-cover bg-center bg-blend-overlay bg-opacity-20 opacity-10"></div>
+      <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1464863979621-258b94be4055?q=80&w=1964&auto=format&fit=crop')] bg-cover bg-center bg-blend-overlay bg-opacity-20 opacity-10"></div>
       
       <div className="container mx-auto px-6 md:px-12 max-w-7xl relative z-10">
         <div className="text-center mb-16">
