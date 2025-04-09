@@ -1,11 +1,14 @@
+
 import React, { useState, useEffect } from 'react';
 import { Menu, X, Info } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useToast } from '@/hooks/use-toast';
+import MembershipForm from './MembershipForm';
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMembershipFormOpen, setIsMembershipFormOpen] = useState(false);
   const { toast } = useToast();
 
   useEffect(() => {
@@ -24,6 +27,11 @@ const Header = () => {
       variant: "default",
       duration: 3000,
     });
+    setIsMobileMenuOpen(false);
+  };
+
+  const handleMembershipClick = () => {
+    setIsMembershipFormOpen(true);
     setIsMobileMenuOpen(false);
   };
 
@@ -67,7 +75,7 @@ const Header = () => {
         </ul>
         <div className="flex space-x-4">
           <button 
-            onClick={() => handleMenuItemClick('Devenir membre')}
+            onClick={handleMembershipClick}
             className={cn(
               'px-4 py-2 text-sm font-medium rounded-md transition-all duration-300',
               isScrolled 
@@ -122,7 +130,7 @@ const Header = () => {
         <div className="flex flex-col space-y-3">
           <button 
             className="w-full py-3 text-cifcg-600 border border-cifcg-200 rounded-md font-medium hover:bg-cifcg-50 transition-colors"
-            onClick={() => handleMenuItemClick('Devenir membre')}
+            onClick={handleMembershipClick}
           >
             Devenir membre
           </button>
@@ -134,6 +142,9 @@ const Header = () => {
           </button>
         </div>
       </nav>
+
+      {/* Membership Form */}
+      <MembershipForm open={isMembershipFormOpen} onOpenChange={setIsMembershipFormOpen} />
     </header>
   );
 };
