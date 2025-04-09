@@ -22,7 +22,7 @@ const Hero = () => {
   return (
     <section 
       ref={heroRef}
-      className="relative h-screen min-h-[700px] bg-cifcg-900 bg-[url('https://images.unsplash.com/photo-1489367874814-f5d040621dd8?q=80&w=2146&auto=format&fit=crop')] bg-cover bg-center bg-blend-overlay bg-opacity-70 flex items-center justify-center text-white overflow-hidden"
+      className="relative h-screen min-h-[700px] bg-cifcg-900 bg-[url('https://images.unsplash.com/photo-1539635278303-d4002c07eae3?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center bg-blend-overlay bg-opacity-70 flex items-center justify-center text-white overflow-hidden"
       style={{ 
         backgroundAttachment: 'fixed',
       }}
