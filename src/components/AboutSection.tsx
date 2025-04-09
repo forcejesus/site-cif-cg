@@ -40,7 +40,7 @@ const AboutSection = () => {
               <div className="absolute -top-4 -left-4 w-24 h-24 bg-cifcg-100 rounded-lg -z-10"></div>
               <div className="absolute -bottom-4 -right-4 w-32 h-32 bg-gold-100 rounded-lg -z-10"></div>
               <img
-                src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=2670&auto=format&fit=crop"
+                src="https://images.unsplash.com/photo-1504450758481-7338eba7524a?q=80&w=1926&auto=format&fit=crop"
                 alt="Réunion d'équipe CIF-CG"
                 className="w-full h-auto rounded-lg shadow-xl"
               />
