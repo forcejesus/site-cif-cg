@@ -1,6 +1,8 @@
+
 import React, { useEffect, useRef } from 'react';
 import { cn } from '@/lib/utils';
 import { useInView } from 'react-intersection-observer';
+import { Link } from 'react-router-dom';
 
 const AboutSection = () => {
   const { ref: sectionRef, inView } = useInView({
@@ -95,12 +97,12 @@ const AboutSection = () => {
               </div>
             </div>
             
-            <a href="/a-propos" className="inline-flex items-center text-cifcg-600 font-medium hover:text-cifcg-700 transition-colors duration-200">
+            <Link to="/a-propos" className="inline-flex items-center text-cifcg-600 font-medium hover:text-cifcg-700 transition-colors duration-200">
               En savoir plus
               <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
               </svg>
-            </a>
+            </Link>
           </div>
         </div>
       </div>

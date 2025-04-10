@@ -48,9 +48,9 @@ const Hero = () => {
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 animate-fade-in opacity-0" style={{ animationDelay: '1.2s' }}>
-            <button className="cta-button-secondary backdrop-blur-sm border border-white/30 bg-transparent text-white hover:bg-white/10">
+            <a href="#about" className="cta-button-secondary backdrop-blur-sm border border-white/30 bg-transparent text-white hover:bg-white/10">
               En savoir plus
-            </button>
+            </a>
           </div>
         </div>
       </div>

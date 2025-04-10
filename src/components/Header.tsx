@@ -63,7 +63,7 @@ const Header = () => {
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-8">
           <ul className="flex space-x-8">
-            {['À propos', 'Actualités', 'Événements', 'Adhésion', 'Contact'].map((item) => (
+            {['À propos', 'Actualités', 'Événements', 'Contact'].map((item) => (
               <li key={item}>
                 <button 
                   onClick={() => handleMenuItemClick(item)}
@@ -120,7 +120,7 @@ const Header = () => {
           )}
         >
           <ul className="space-y-4 mb-6">
-            {['À propos', 'Actualités', 'Événements', 'Adhésion', 'Contact'].map((item) => (
+            {['À propos', 'Actualités', 'Événements', 'Contact'].map((item) => (
               <li key={item}>
                 <button 
                   className="block py-2 text-cifcg-800 hover:text-cifcg-600 transition-colors font-medium w-full text-left flex items-center gap-2"
