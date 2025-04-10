@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { MapPin, Phone, Mail, Clock, Globe } from 'lucide-react';
@@ -7,19 +7,38 @@ import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 
 const ContactPage = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
       
-      <main className="flex-grow pt-24 pb-16">
-        <div className="container mx-auto px-6 md:px-12 max-w-7xl">
-          <div className="text-center my-12">
-            <h1 className="text-4xl md:text-5xl font-bold font-display mb-6">Contactez-nous</h1>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Pour toute question ou information concernant la Convergence et Initiative Francophone au Congo, n'hésitez pas à nous contacter.
+      {/* Hero Banner */}
+      <div className="relative pt-20">
+        <div className="absolute inset-0 bg-cifcg-900 bg-opacity-80 z-10" />
+        <div 
+          className="relative z-0 h-[300px] md:h-[400px] bg-cover bg-center"
+          style={{ 
+            backgroundImage: "url('https://images.unsplash.com/photo-1541280910158-c4e14f9c94a3?q=80&w=2069&auto=format&fit=crop')",
+            backgroundAttachment: 'fixed'
+          }}
+        />
+        <div className="absolute inset-0 flex items-center justify-center z-20">
+          <div className="text-center text-white px-6">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-4">
+              Contactez-nous
+            </h1>
+            <p className="max-w-2xl mx-auto text-lg md:text-xl text-white/90">
+              Pour toute question ou information concernant la Convergence et Initiative Francophone au Congo
             </p>
           </div>
-          
+        </div>
+      </div>
+      
+      <main className="flex-grow py-16">
+        <div className="container mx-auto px-6 md:px-12 max-w-7xl">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mt-10">
             {/* Contact Information */}
             <div className="bg-white p-8 rounded-xl shadow-sm border border-gray-100">
