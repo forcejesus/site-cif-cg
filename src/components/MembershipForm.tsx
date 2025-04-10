@@ -3,9 +3,8 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { User, Phone, Mail, Flag } from 'lucide-react';
+import { User, Phone, Mail } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
-import countries from '@/lib/countries';
 
 import {
   Form,
@@ -17,20 +16,12 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
 
 const formSchema = z.object({
   firstName: z.string().min(2, { message: 'Le prénom doit contenir au moins 2 caractères' }),
   lastName: z.string().min(2, { message: 'Le nom doit contenir au moins 2 caractères' }),
   email: z.string().email({ message: 'Adresse email invalide' }),
   phone: z.string().min(6, { message: 'Numéro de téléphone invalide' }),
-  country: z.string().min(1, { message: 'Veuillez sélectionner un pays' }),
 });
 
 type FormValues = z.infer<typeof formSchema>;
@@ -45,7 +36,6 @@ const MembershipForm = ({ onClose }: { onClose: () => void }) => {
       lastName: '',
       email: '',
       phone: '',
-      country: '',
     },
   });
 
@@ -55,7 +45,7 @@ const MembershipForm = ({ onClose }: { onClose: () => void }) => {
 
     toast({
       title: "Demande d'adhésion reçue",
-      description: "Merci ! Nous avons bien reçu votre demande d'adhésion et nous vous contacterons prochainement.",
+      description: "Merci ! Nous avons bien reçu votre demande d'adhésion et nous vous contacterons prochainement pour finaliser votre inscription.",
       duration: 5000,
     });
 
@@ -135,36 +125,6 @@ const MembershipForm = ({ onClose }: { onClose: () => void }) => {
                   {...field} 
                 />
               </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <FormField
-          control={form.control}
-          name="country"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel className="flex items-center gap-2">
-                <Flag size={16} className="text-cifcg-600" /> Pays
-              </FormLabel>
-              <Select 
-                onValueChange={field.onChange} 
-                defaultValue={field.value}
-              >
-                <FormControl>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Sélectionnez votre pays" />
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent className="max-h-[300px]">
-                  {countries.map((country) => (
-                    <SelectItem key={country.code} value={country.code}>
-                      {country.name}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
               <FormMessage />
             </FormItem>
           )}

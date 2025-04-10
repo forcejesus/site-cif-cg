@@ -24,8 +24,10 @@ const MembershipDialog = ({ isOpen, onClose }: MembershipDialogProps) => {
         </DialogHeader>
         <div className="mt-4">
           <p className="text-cifcg-600 mb-6">
-            Rejoignez notre communauté francophone au Congo et participez à nos initiatives culturelles, 
-            éducatives et sociales. Veuillez remplir ce formulaire pour soumettre votre demande d'adhésion.
+            Rejoignez notre communauté dynamique et devenez acteur du rayonnement de la francophonie au Congo ! 
+            En tant que membre, vous bénéficierez d'un réseau professionnel enrichissant, d'événements exclusifs 
+            et de l'opportunité de participer à des projets impactants. Suite à votre demande, un membre de notre 
+            équipe vous contactera personnellement pour finaliser votre adhésion et vous présenter tous les avantages.
           </p>
           <MembershipForm onClose={onClose} />
         </div>

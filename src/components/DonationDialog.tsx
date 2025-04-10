@@ -24,8 +24,10 @@ const DonationDialog = ({ isOpen, onClose }: DonationDialogProps) => {
         </DialogHeader>
         <div className="mt-4">
           <p className="text-cifcg-600 mb-6">
-            Votre soutien est précieux pour nous aider à réaliser nos projets et soutenir la francophonie au Congo. 
-            Veuillez remplir ce formulaire pour nous faire part de votre intention de don.
+            Votre générosité est essentielle pour soutenir nos actions au Congo ! Chaque don, quel que soit son montant, 
+            contribue directement à nos projets culturels, éducatifs et sociaux pour promouvoir la francophonie. 
+            Après votre soumission, nous vous enverrons un email détaillant les différentes méthodes de paiement 
+            disponibles pour finaliser votre contribution.
           </p>
           <DonationForm onClose={onClose} />
         </div>
