@@ -1,8 +1,9 @@
 
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Info } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useToast } from '@/hooks/use-toast';
+import { Link } from 'react-router-dom';
 import MembershipDialog from './MembershipDialog';
 import DonationDialog from './DonationDialog';
 
@@ -27,13 +28,6 @@ const Header = () => {
       setIsMembershipDialogOpen(true);
     } else if (item === 'Faire un don') {
       setIsDonationDialogOpen(true);
-    } else {
-      toast({
-        title: "📋 Page en cours de développement",
-        description: `La page "${item}" est actuellement en développement et sera disponible prochainement.`,
-        variant: "default",
-        duration: 3000,
-      });
     }
     setIsMobileMenuOpen(false);
   };
@@ -50,32 +44,63 @@ const Header = () => {
       >
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           {/* Logo */}
-          <a 
-            href="/" 
+          <Link 
+            to="/" 
             className={cn(
               'font-display text-2xl font-bold transition-colors duration-300',
               isScrolled ? 'text-cifcg-900' : 'text-white'
             )}
           >
             <span className="text-cifcg-600">CIF</span>-CG
-          </a>
+          </Link>
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-8">
           <ul className="flex space-x-8">
-            {['À propos', 'Actualités', 'Événements', 'Contact'].map((item) => (
-              <li key={item}>
-                <button 
-                  onClick={() => handleMenuItemClick(item)}
-                  className={cn(
-                    'text-sm font-medium transition-colors duration-300 flex items-center gap-1',
-                    isScrolled ? 'text-cifcg-800 hover:text-cifcg-600' : 'text-white/90 hover:text-white'
-                  )}
-                >
-                  {item}
-                </button>
-              </li>
-            ))}
+            <li>
+              <Link 
+                to="/a-propos"
+                className={cn(
+                  'text-sm font-medium transition-colors duration-300',
+                  isScrolled ? 'text-cifcg-800 hover:text-cifcg-600' : 'text-white/90 hover:text-white'
+                )}
+              >
+                À propos
+              </Link>
+            </li>
+            <li>
+              <Link 
+                to="/actualites"
+                className={cn(
+                  'text-sm font-medium transition-colors duration-300',
+                  isScrolled ? 'text-cifcg-800 hover:text-cifcg-600' : 'text-white/90 hover:text-white'
+                )}
+              >
+                Actualités
+              </Link>
+            </li>
+            <li>
+              <Link 
+                to="/evenements"
+                className={cn(
+                  'text-sm font-medium transition-colors duration-300',
+                  isScrolled ? 'text-cifcg-800 hover:text-cifcg-600' : 'text-white/90 hover:text-white'
+                )}
+              >
+                Événements
+              </Link>
+            </li>
+            <li>
+              <Link 
+                to="/contact"
+                className={cn(
+                  'text-sm font-medium transition-colors duration-300',
+                  isScrolled ? 'text-cifcg-800 hover:text-cifcg-600' : 'text-white/90 hover:text-white'
+                )}
+              >
+                Contact
+              </Link>
+            </li>
           </ul>
           <div className="flex space-x-4">
             <button 
@@ -120,16 +145,42 @@ const Header = () => {
           )}
         >
           <ul className="space-y-4 mb-6">
-            {['À propos', 'Actualités', 'Événements', 'Contact'].map((item) => (
-              <li key={item}>
-                <button 
-                  className="block py-2 text-cifcg-800 hover:text-cifcg-600 transition-colors font-medium w-full text-left flex items-center gap-2"
-                  onClick={() => handleMenuItemClick(item)}
-                >
-                  {item}
-                </button>
-              </li>
-            ))}
+            <li>
+              <Link 
+                to="/a-propos"
+                className="block py-2 text-cifcg-800 hover:text-cifcg-600 transition-colors font-medium w-full text-left"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                À propos
+              </Link>
+            </li>
+            <li>
+              <Link 
+                to="/actualites"
+                className="block py-2 text-cifcg-800 hover:text-cifcg-600 transition-colors font-medium w-full text-left"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Actualités
+              </Link>
+            </li>
+            <li>
+              <Link 
+                to="/evenements"
+                className="block py-2 text-cifcg-800 hover:text-cifcg-600 transition-colors font-medium w-full text-left"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Événements
+              </Link>
+            </li>
+            <li>
+              <Link 
+                to="/contact"
+                className="block py-2 text-cifcg-800 hover:text-cifcg-600 transition-colors font-medium w-full text-left"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Contact
+              </Link>
+            </li>
           </ul>
           <div className="flex flex-col space-y-3">
             <button 
