@@ -4,11 +4,13 @@ import { Menu, X, Info } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useToast } from '@/hooks/use-toast';
 import MembershipDialog from './MembershipDialog';
+import DonationDialog from './DonationDialog';
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isMembershipDialogOpen, setIsMembershipDialogOpen] = useState(false);
+  const [isDonationDialogOpen, setIsDonationDialogOpen] = useState(false);
   const { toast } = useToast();
 
   useEffect(() => {
@@ -23,6 +25,8 @@ const Header = () => {
   const handleMenuItemClick = (item: string) => {
     if (item === 'Devenir membre') {
       setIsMembershipDialogOpen(true);
+    } else if (item === 'Faire un don') {
+      setIsDonationDialogOpen(true);
     } else {
       toast({
         title: "📋 Page en cours de développement",
@@ -86,7 +90,7 @@ const Header = () => {
               Devenir membre
             </button>
             <button 
-              onClick={() => handleMenuItemClick('Faire un don')}
+              onClick={() => setIsDonationDialogOpen(true)}
               className="px-4 py-2 bg-cifcg-600 text-white text-sm font-medium rounded-md transition-all duration-300 hover:bg-cifcg-700"
             >
               Faire un don
@@ -139,7 +143,10 @@ const Header = () => {
             </button>
             <button 
               className="w-full py-3 bg-cifcg-600 text-white rounded-md font-medium hover:bg-cifcg-700 transition-colors"
-              onClick={() => handleMenuItemClick('Faire un don')}
+              onClick={() => {
+                setIsDonationDialogOpen(true);
+                setIsMobileMenuOpen(false);
+              }}
             >
               Faire un don
             </button>
@@ -151,6 +158,12 @@ const Header = () => {
       <MembershipDialog 
         isOpen={isMembershipDialogOpen} 
         onClose={() => setIsMembershipDialogOpen(false)} 
+      />
+
+      {/* Donation Dialog */}
+      <DonationDialog 
+        isOpen={isDonationDialogOpen} 
+        onClose={() => setIsDonationDialogOpen(false)} 
       />
     </>
   );

@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef } from 'react';
 import { cn } from '@/lib/utils';
 
@@ -21,7 +22,7 @@ const Hero = () => {
   return (
     <section 
       ref={heroRef}
-      className="relative h-screen min-h-[700px] bg-cifcg-900 bg-[url('https://images.unsplash.com/photo-1507003211169-0a1dd7bf1034?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center bg-blend-overlay bg-opacity-70 flex items-center justify-center text-white overflow-hidden"
+      className="relative h-screen min-h-[700px] bg-cifcg-900 bg-[url('https://images.unsplash.com/photo-1507003211169-0a1dd7bf1034?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')] bg-cover bg-center bg-blend-overlay bg-opacity-70 flex items-center justify-center text-white overflow-hidden"
       style={{ 
         backgroundAttachment: 'fixed',
       }}
@@ -47,9 +48,6 @@ const Hero = () => {
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 animate-fade-in opacity-0" style={{ animationDelay: '1.2s' }}>
-            <button className="cta-button">
-              Rejoignez-nous
-            </button>
             <button className="cta-button-secondary backdrop-blur-sm border border-white/30 bg-transparent text-white hover:bg-white/10">
               En savoir plus
             </button>
@@ -69,8 +67,7 @@ const Hero = () => {
             strokeLinecap="round" 
             strokeLinejoin="round" 
             strokeWidth="2" 
-            d="M19 14l-7 7m0 0l-7-7m7 7V3"
-          />
+            d="m1 1 4 4 4-4"/>
         </svg>
       </div>
     </section>
