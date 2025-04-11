@@ -1,7 +1,7 @@
-
 import React from 'react';
 import { Facebook, Twitter, Instagram, Youtube, Mail, MapPin, Phone, Info } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
   const { toast } = useToast();
@@ -58,59 +58,48 @@ const Footer = () => {
             <h3 className="text-lg font-semibold mb-6">Liens Rapides</h3>
             <ul className="space-y-4">
               <li>
-                <button 
-                  onClick={() => handleLinkClick("À Propos")} 
+                <Link 
+                  to="/a-propos" 
                   className="text-gray-400 hover:text-white transition-colors text-left flex items-center gap-1 group"
                 >
                   <span className="opacity-0 -ml-5 mr-1 group-hover:opacity-100 transition-opacity">
                     <Info className="w-3.5 h-3.5 text-cifcg-500" />
                   </span>
                   À Propos
-                </button>
+                </Link>
               </li>
               <li>
-                <button 
-                  onClick={() => handleLinkClick("Actualités")} 
+                <Link 
+                  to="/actualites" 
                   className="text-gray-400 hover:text-white transition-colors text-left flex items-center gap-1 group"
                 >
                   <span className="opacity-0 -ml-5 mr-1 group-hover:opacity-100 transition-opacity">
                     <Info className="w-3.5 h-3.5 text-cifcg-500" />
                   </span>
                   Actualités
-                </button>
+                </Link>
               </li>
               <li>
-                <button 
-                  onClick={() => handleLinkClick("Événements")} 
+                <Link 
+                  to="/evenements" 
                   className="text-gray-400 hover:text-white transition-colors text-left flex items-center gap-1 group"
                 >
                   <span className="opacity-0 -ml-5 mr-1 group-hover:opacity-100 transition-opacity">
                     <Info className="w-3.5 h-3.5 text-cifcg-500" />
                   </span>
                   Événements
-                </button>
+                </Link>
               </li>
               <li>
-                <button 
-                  onClick={() => handleLinkClick("Adhésion")} 
-                  className="text-gray-400 hover:text-white transition-colors text-left flex items-center gap-1 group"
-                >
-                  <span className="opacity-0 -ml-5 mr-1 group-hover:opacity-100 transition-opacity">
-                    <Info className="w-3.5 h-3.5 text-cifcg-500" />
-                  </span>
-                  Adhésion
-                </button>
-              </li>
-              <li>
-                <button 
-                  onClick={() => handleLinkClick("Contact")} 
+                <Link 
+                  to="/contact" 
                   className="text-gray-400 hover:text-white transition-colors text-left flex items-center gap-1 group"
                 >
                   <span className="opacity-0 -ml-5 mr-1 group-hover:opacity-100 transition-opacity">
                     <Info className="w-3.5 h-3.5 text-cifcg-500" />
                   </span>
                   Contact
-                </button>
+                </Link>
               </li>
             </ul>
           </div>
