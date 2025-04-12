@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -18,6 +18,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
+import { Progress } from '@/components/ui/progress';
 
 const formSchema = z.object({
   firstName: z.string().min(2, { message: 'Le prénom doit contenir au moins 2 caractères' }),
@@ -31,6 +32,7 @@ type FormValues = z.infer<typeof formSchema>;
 
 const DonationForm = ({ onClose }: { onClose: () => void }) => {
   const { toast } = useToast();
+  const [isSubmitting, setIsSubmitting] = useState(false);
   
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -45,6 +47,8 @@ const DonationForm = ({ onClose }: { onClose: () => void }) => {
 
   const onSubmit = async (data: FormValues) => {
     try {
+      setIsSubmitting(true);
+      
       // Convertir les données du formulaire au format attendu par l'API
       const donationData = {
         prenom: data.firstName,
@@ -74,12 +78,21 @@ const DonationForm = ({ onClose }: { onClose: () => void }) => {
         variant: "destructive",
         duration: 5000,
       });
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+        {isSubmitting && (
+          <div className="mb-4">
+            <p className="text-sm text-cifcg-600 mb-2">Envoi en cours...</p>
+            <Progress value={75} className="h-2 bg-cifcg-100" />
+          </div>
+        )}
+        
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <FormField
             control={form.control}
@@ -179,14 +192,16 @@ const DonationForm = ({ onClose }: { onClose: () => void }) => {
             type="button" 
             variant="outline"
             onClick={onClose}
+            disabled={isSubmitting}
           >
             Annuler
           </Button>
           <Button 
             type="submit" 
             className="bg-cifcg-600 hover:bg-cifcg-700"
+            disabled={isSubmitting}
           >
-            Envoyer ma demande
+            {isSubmitting ? 'Envoi en cours...' : 'Envoyer ma demande'}
           </Button>
         </div>
       </form>

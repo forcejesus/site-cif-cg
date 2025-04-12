@@ -46,7 +46,7 @@ export const submitDonation = async (donationData: DonationRequest): Promise<any
 
 // Fonction pour envoyer une demande d'adhésion
 export const submitMembership = async (membershipData: MembershipRequest): Promise<any> => {
-  const response = await fetch(`${API_HOST}/api/donation/`, {
+  const response = await fetch(`${API_HOST}/api/adhesion/`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
