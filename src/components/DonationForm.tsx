@@ -5,6 +5,7 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { User, Phone, Mail, MessageSquare } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { submitDonation } from '@/services/formService';
 
 import {
   Form,
@@ -42,18 +43,38 @@ const DonationForm = ({ onClose }: { onClose: () => void }) => {
     },
   });
 
-  const onSubmit = (data: FormValues) => {
-    // Dans une application réelle, nous enverrions ces données à un backend
-    console.log('Formulaire de don soumis :', data);
+  const onSubmit = async (data: FormValues) => {
+    try {
+      // Convertir les données du formulaire au format attendu par l'API
+      const donationData = {
+        prenom: data.firstName,
+        nom: data.lastName,
+        adresse_email: data.email,
+        telephone: data.phone,
+        message: data.message || '',
+      };
 
-    toast({
-      title: "Votre demande de don a été enregistrée",
-      description: "Merci pour votre soutien ! Nous vous contacterons bientôt pour finaliser votre don.",
-      duration: 5000,
-    });
+      // Envoyer les données à l'API
+      await submitDonation(donationData);
 
-    // Fermer le dialogue
-    onClose();
+      toast({
+        title: "Votre demande de don a été enregistrée",
+        description: "Merci pour votre soutien ! Nous vous contacterons bientôt pour finaliser votre don.",
+        duration: 5000,
+      });
+
+      // Fermer le dialogue
+      onClose();
+    } catch (error) {
+      console.error("Erreur lors de l'envoi de la demande de don:", error);
+      
+      toast({
+        title: "Erreur",
+        description: "Une erreur est survenue lors de l'envoi de votre demande. Veuillez réessayer plus tard.",
+        variant: "destructive",
+        duration: 5000,
+      });
+    }
   };
 
   return (

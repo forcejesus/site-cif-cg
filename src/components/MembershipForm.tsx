@@ -5,6 +5,7 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { User, Phone, Mail } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { submitMembership } from '@/services/formService';
 
 import {
   Form,
@@ -39,18 +40,37 @@ const MembershipForm = ({ onClose }: { onClose: () => void }) => {
     },
   });
 
-  const onSubmit = (data: FormValues) => {
-    // Dans une application réelle, nous enverrions ces données à un backend
-    console.log('Formulaire soumis :', data);
+  const onSubmit = async (data: FormValues) => {
+    try {
+      // Convertir les données du formulaire au format attendu par l'API
+      const membershipData = {
+        prenom: data.firstName,
+        nom: data.lastName,
+        adresse_email: data.email,
+        telephone: data.phone,
+      };
 
-    toast({
-      title: "Demande d'adhésion reçue",
-      description: "Merci ! Nous avons bien reçu votre demande d'adhésion et nous vous contacterons prochainement pour finaliser votre inscription.",
-      duration: 5000,
-    });
+      // Envoyer les données à l'API
+      await submitMembership(membershipData);
 
-    // Fermer le dialogue
-    onClose();
+      toast({
+        title: "Demande d'adhésion reçue",
+        description: "Merci ! Nous avons bien reçu votre demande d'adhésion et nous vous contacterons prochainement pour finaliser votre inscription.",
+        duration: 5000,
+      });
+
+      // Fermer le dialogue
+      onClose();
+    } catch (error) {
+      console.error("Erreur lors de l'envoi de la demande d'adhésion:", error);
+      
+      toast({
+        title: "Erreur",
+        description: "Une erreur est survenue lors de l'envoi de votre demande. Veuillez réessayer plus tard.",
+        variant: "destructive",
+        duration: 5000,
+      });
+    }
   };
 
   return (
