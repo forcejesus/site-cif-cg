@@ -8,6 +8,7 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import AboutPage from "./pages/AboutPage";
 import ActualitesPage from "./pages/ActualitesPage";
+import ArticleDetailPage from "./pages/ArticleDetailPage";
 import EvenementsPage from "./pages/EvenementsPage";
 import ContactPage from "./pages/ContactPage";
 
@@ -23,6 +24,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/a-propos" element={<AboutPage />} />
           <Route path="/actualites" element={<ActualitesPage />} />
+          <Route path="/actualites/:id" element={<ArticleDetailPage />} />
           <Route path="/evenements" element={<EvenementsPage />} />
           <Route path="/contact" element={<ContactPage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
