@@ -1,12 +1,14 @@
 
 import React from 'react';
-import { Calendar, Clock, MapPin, Newspaper, ArrowRight } from 'lucide-react';
+import { Calendar, Clock, MapPin, Newspaper, ArrowRight, Tag, CreditCard } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useInView } from 'react-intersection-observer';
 import { Link } from 'react-router-dom';
 import { useArticles } from '@/services/articleService';
+import { useEvents } from '@/services/eventService';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
+import { Badge } from '@/components/ui/badge';
 
 const NewsEvents = () => {
   const { ref: newsSectionRef, inView: newsInView } = useInView({
@@ -19,11 +21,13 @@ const NewsEvents = () => {
     triggerOnce: true,
   });
 
-  const { data: articles, isLoading, error } = useArticles();
+  const { data: articles, isLoading: isLoadingArticles, error: articlesError } = useArticles();
+  const { data: events, isLoading: isLoadingEvents, error: eventsError } = useEvents();
 
   return (
     <section className="py-24 bg-gray-50">
       <div className="container mx-auto px-6 md:px-12 max-w-7xl">
+        {/* Articles Section */}
         <div ref={newsSectionRef} className="mb-20">
           <div className="text-center mb-16">
             <h2 className={cn(
@@ -40,7 +44,7 @@ const NewsEvents = () => {
             </p>
           </div>
 
-          {isLoading ? (
+          {isLoadingArticles ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {[...Array(4)].map((_, i) => (
                 <Card key={i} className="overflow-hidden h-full transition-all duration-300 hover:shadow-lg">
@@ -53,7 +57,7 @@ const NewsEvents = () => {
                 </Card>
               ))}
             </div>
-          ) : error ? (
+          ) : articlesError ? (
             <div className="bg-white p-10 rounded-xl text-center shadow-md">
               <div className="mb-6">
                 <Newspaper className="w-12 h-12 mx-auto text-cifcg-300" />
@@ -142,6 +146,7 @@ const NewsEvents = () => {
           </div>
         </div>
 
+        {/* Events Section */}
         <div ref={eventsSectionRef} className="mt-20">
           <div className="text-center mb-16">
             <h2 className={cn(
@@ -158,24 +163,86 @@ const NewsEvents = () => {
             </p>
           </div>
           
-          {/* Empty state message for events */}
-          <div 
-            className={cn(
-              "bg-white p-10 rounded-xl text-center shadow-md opacity-0",
-              eventsInView && "animate-slide-in"
-            )}
-            style={{ animationDelay: '0.3s' }}
-          >
-            <div className="mb-6">
-              <Calendar className="w-12 h-12 mx-auto text-cifcg-300" />
+          {isLoadingEvents ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {[...Array(4)].map((_, i) => (
+                <Card key={i} className="overflow-hidden h-full transition-all duration-300 hover:shadow-lg">
+                  <Skeleton className="h-48 w-full" />
+                  <div className="p-5">
+                    <Skeleton className="h-6 w-3/4 mb-2" />
+                    <Skeleton className="h-4 w-full mb-2" />
+                    <Skeleton className="h-4 w-5/6" />
+                  </div>
+                </Card>
+              ))}
             </div>
-            <h3 className="text-xl font-semibold text-cifcg-800 mb-3">
-              Aucun événement à venir pour le moment
-            </h3>
-            <p className="text-gray-600 max-w-md mx-auto">
-              Nous préparons de nouveaux événements. Revenez bientôt pour découvrir notre programme.
-            </p>
-          </div>
+          ) : eventsError || !events || events.length === 0 ? (
+            <div 
+              className={cn(
+                "bg-white p-10 rounded-xl text-center shadow-md opacity-0",
+                eventsInView && "animate-slide-in"
+              )}
+              style={{ animationDelay: '0.3s' }}
+            >
+              <div className="mb-6">
+                <Calendar className="w-12 h-12 mx-auto text-cifcg-300" />
+              </div>
+              <h3 className="text-xl font-semibold text-cifcg-800 mb-3">
+                Aucun événement à venir pour le moment
+              </h3>
+              <p className="text-gray-600 max-w-md mx-auto">
+                Nous préparons de nouveaux événements. Revenez bientôt pour découvrir notre programme.
+              </p>
+            </div>
+          ) : (
+            <div 
+              className={cn(
+                "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 opacity-0",
+                eventsInView && "animate-slide-in"
+              )}
+              style={{ animationDelay: '0.3s' }}
+            >
+              {events.slice(0, 4).map((event) => (
+                <Card key={event.id} className="overflow-hidden h-full transition-all duration-300 hover:shadow-lg hover:translate-y-[-5px]">
+                  <div 
+                    className="h-48 bg-cover bg-center" 
+                    style={{ 
+                      backgroundImage: `url(${event.image.startsWith('/') 
+                        ? `https://data.cif-cg.org${event.image}` 
+                        : event.image})`
+                    }}
+                  />
+                  <CardHeader className="p-5 pb-2">
+                    <div className="flex justify-between items-start mb-2">
+                      <Badge variant="outline" className="bg-cifcg-50 text-cifcg-700 font-medium">
+                        <Tag className="mr-1 h-3 w-3" /> {event.type}
+                      </Badge>
+                      <Badge variant="outline" className="bg-cifcg-50 text-cifcg-700 font-medium">
+                        <CreditCard className="mr-1 h-3 w-3" /> {event.prix > 0 ? `${event.prix} FCFA` : 'Gratuit'}
+                      </Badge>
+                    </div>
+                    <CardTitle className="text-lg font-bold text-cifcg-800 line-clamp-2">
+                      {event.titre}
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="p-5 pt-0">
+                    <CardDescription className="text-sm text-gray-600 line-clamp-3">
+                      {event.description_courte}
+                    </CardDescription>
+                  </CardContent>
+                  <CardFooter className="p-5 pt-0">
+                    <Link 
+                      to={`/evenements/${event.id}`}
+                      className="text-cifcg-600 font-medium text-sm flex items-center hover:text-cifcg-800 transition-colors"
+                    >
+                      Plus de détails
+                      <ArrowRight className="ml-2 w-4 h-4" />
+                    </Link>
+                  </CardFooter>
+                </Card>
+              ))}
+            </div>
+          )}
 
           <div className="text-center mt-10">
             <Link 
