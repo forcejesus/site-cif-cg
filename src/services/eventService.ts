@@ -25,13 +25,18 @@ export const fetchEvents = async (): Promise<Event[]> => {
 };
 
 export const fetchEventById = async (id: number): Promise<Event> => {
-  const response = await fetch(`${API_HOST}/api/evenements/${id}/`);
-  
-  if (!response.ok) {
-    throw new Error("Événement non trouvé");
+  try {
+    const response = await fetch(`${API_HOST}/api/evenements/${id}/`);
+    
+    if (!response.ok) {
+      throw new Error("Événement non trouvé");
+    }
+    
+    return response.json();
+  } catch (error) {
+    console.error("Erreur lors de la récupération de l'événement:", error);
+    throw error;
   }
-  
-  return response.json();
 };
 
 export const useEvents = () => {
@@ -46,5 +51,6 @@ export const useEvent = (id: number) => {
     queryKey: ['event', id],
     queryFn: () => fetchEventById(id),
     enabled: !!id,
+    retry: 1,
   });
 };

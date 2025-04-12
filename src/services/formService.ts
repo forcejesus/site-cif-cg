@@ -29,51 +29,66 @@ export interface ContactRequest {
 
 // Fonction pour envoyer une demande de donation
 export const submitDonation = async (donationData: DonationRequest): Promise<any> => {
-  const response = await fetch(`${API_HOST}/api/donation/`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(donationData),
-  });
-  
-  if (!response.ok) {
-    throw new Error("Erreur lors de l'envoi de la demande de donation");
+  try {
+    const response = await fetch(`${API_HOST}/api/donation/`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(donationData),
+    });
+    
+    if (!response.ok) {
+      throw new Error("Erreur lors de l'envoi de la demande de donation");
+    }
+    
+    return response.json();
+  } catch (error) {
+    console.error("Erreur lors de la soumission de la donation:", error);
+    throw error;
   }
-  
-  return response.json();
 };
 
 // Fonction pour envoyer une demande d'adhésion
 export const submitMembership = async (membershipData: MembershipRequest): Promise<any> => {
-  const response = await fetch(`${API_HOST}/api/adhesion/`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(membershipData),
-  });
-  
-  if (!response.ok) {
-    throw new Error("Erreur lors de l'envoi de la demande d'adhésion");
+  try {
+    const response = await fetch(`${API_HOST}/api/adhesion/`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(membershipData),
+    });
+    
+    if (!response.ok) {
+      throw new Error("Erreur lors de l'envoi de la demande d'adhésion");
+    }
+    
+    return response.json();
+  } catch (error) {
+    console.error("Erreur lors de la soumission de l'adhésion:", error);
+    throw error;
   }
-  
-  return response.json();
 };
 
 // Fonction pour envoyer un message via le formulaire de contact
 export const submitContactForm = async (contactData: ContactRequest): Promise<any> => {
-  const response = await fetch(`${API_HOST}/api/contact/`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(contactData),
-  });
-  
-  if (!response.ok) {
-    throw new Error("Erreur lors de l'envoi du message de contact");
+  try {
+    const response = await fetch(`${API_HOST}/api/contact/`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(contactData),
+    });
+    
+    if (!response.ok) {
+      throw new Error("Erreur lors de l'envoi du message de contact");
+    }
+    
+    return response.json();
+  } catch (error) {
+    console.error("Erreur lors de la soumission du formulaire de contact:", error);
+    throw error;
   }
-  
-  return response.json();
 };

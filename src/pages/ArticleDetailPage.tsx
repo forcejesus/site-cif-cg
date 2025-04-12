@@ -6,6 +6,7 @@ import Footer from '@/components/Footer';
 import { useArticle } from '@/services/articleService';
 import { ArrowLeft } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
+import { toast } from "sonner";
 
 const ArticleDetailPage = () => {
   const { id } = useParams<{ id: string }>();
@@ -17,6 +18,13 @@ const ArticleDetailPage = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  useEffect(() => {
+    if (error) {
+      toast.error("Impossible de charger cet article");
+      console.error("Erreur lors du chargement de l'article:", error);
+    }
+  }, [error]);
 
   if (error) {
     return (

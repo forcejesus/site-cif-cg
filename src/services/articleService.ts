@@ -22,13 +22,18 @@ export const fetchArticles = async (): Promise<Article[]> => {
 };
 
 export const fetchArticleById = async (id: number): Promise<Article> => {
-  const response = await fetch(`${API_HOST}/api/articles/${id}/`);
-  
-  if (!response.ok) {
-    throw new Error("Article non trouvé");
+  try {
+    const response = await fetch(`${API_HOST}/api/articles/${id}/`);
+    
+    if (!response.ok) {
+      throw new Error("Article non trouvé");
+    }
+    
+    return response.json();
+  } catch (error) {
+    console.error("Erreur lors de la récupération de l'article:", error);
+    throw error;
   }
-  
-  return response.json();
 };
 
 export const useArticles = () => {
@@ -43,5 +48,6 @@ export const useArticle = (id: number) => {
     queryKey: ['article', id],
     queryFn: () => fetchArticleById(id),
     enabled: !!id,
+    retry: 1,
   });
 };

@@ -7,6 +7,7 @@ import { useEvent } from '@/services/eventService';
 import { ArrowLeft, Tag, CreditCard, Info } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Badge } from '@/components/ui/badge';
+import { toast } from "sonner";
 
 const EventDetailPage = () => {
   const { id } = useParams<{ id: string }>();
@@ -18,6 +19,13 @@ const EventDetailPage = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  useEffect(() => {
+    if (error) {
+      toast.error("Impossible de charger cet événement");
+      console.error("Erreur lors du chargement de l'événement:", error);
+    }
+  }, [error]);
 
   if (error) {
     return (
