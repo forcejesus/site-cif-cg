@@ -25,18 +25,17 @@ export const fetchEvents = async (): Promise<Event[]> => {
 };
 
 export const fetchEventById = async (id: number): Promise<Event> => {
-  try {
-    const response = await fetch(`${API_HOST}/api/evenements/${id}/`);
-    
-    if (!response.ok) {
-      throw new Error("Événement non trouvé");
-    }
-    
-    return response.json();
-  } catch (error) {
-    console.error("Erreur lors de la récupération de l'événement:", error);
-    throw error;
+  console.log(`Fetching event with ID: ${id}`);
+  const response = await fetch(`${API_HOST}/api/evenements/${id}/`);
+  
+  if (!response.ok) {
+    console.error(`Error fetching event ${id}, status: ${response.status}`);
+    throw new Error("Événement non trouvé");
   }
+  
+  const data = await response.json();
+  console.log("Event data received:", data);
+  return data;
 };
 
 export const useEvents = () => {

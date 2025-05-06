@@ -22,18 +22,17 @@ export const fetchArticles = async (): Promise<Article[]> => {
 };
 
 export const fetchArticleById = async (id: number): Promise<Article> => {
-  try {
-    const response = await fetch(`${API_HOST}/api/articles/${id}/`);
-    
-    if (!response.ok) {
-      throw new Error("Article non trouvé");
-    }
-    
-    return response.json();
-  } catch (error) {
-    console.error("Erreur lors de la récupération de l'article:", error);
-    throw error;
+  console.log(`Fetching article with ID: ${id}`);
+  const response = await fetch(`${API_HOST}/api/articles/${id}/`);
+  
+  if (!response.ok) {
+    console.error(`Error fetching article ${id}, status: ${response.status}`);
+    throw new Error("Article non trouvé");
   }
+  
+  const data = await response.json();
+  console.log("Article data received:", data);
+  return data;
 };
 
 export const useArticles = () => {
